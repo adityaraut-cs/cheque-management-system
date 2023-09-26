@@ -1,0 +1,20 @@
+{
+    "oracledb": [
+        {
+            "alias": "oraclePool",
+            "user": "SBIL_DEV_NEW",
+            "password": "SBIL_DEV_NEW",
+            "connectString": "fundsdb19c.chwkrfaqj9m1.ap-south-1.rds.amazonaws.com:1521/wforcl"
+        }
+    ],
+    "DATE_FORMAT": "DD-MM-YYYY",
+    "DATE_TIME_FORMAT":"DD-MM-YYYY hh24:mi:ss",
+    "mq": "rabbitmq",
+    "rabbitmq": {
+        "user": "credence",
+        "password": "credence",
+        "serverip": "localhost",
+        "exchange": "sysevents"
+    }
+
+}
