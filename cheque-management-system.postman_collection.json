@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "24a2398f-df2b-40bd-ac1b-ca6cb33b42b8",
+		"name": "cheque-management-system",
+		"description": "This Collection provides a set of APIs to manage payment records and notifications within the Cheque Management System. The system allows users to upload payment data, authorize or unauthorize that payment, and trigger notifications when an payment is authorized/unauthorized. It also integrates with a message queue for event tracking and email notifications.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28352794"
+	},
+	"item": [
+		{
+			"name": "Upload Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sessionid",
+						"value": "fundsonline",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"payment_id\": 1,\r\n            \"payment_date\": \"30-09-2023\",\r\n            \"payee_name\": \"Soham\",\r\n            \"bank_name\": \"SBI Bank\",\r\n            \"bank_code\": \"45\",\r\n            \"amount\": 1000,\r\n            \"amount_in_words\": \"One thousand dollars\",\r\n            \"email_address\": \"adityarautr947@gmail.com\",\r\n            \"payment_mode\": \"Cheque\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/payments/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"payments",
+						"upload"
+					]
+				},
+				"description": "Upload Payments Uploads the payment data.\n\n- **payment_id (Integer):** A unique identifier for the payment.\n    \n- **payment_date (String):** The date of the payment in the format \"dd-mm-yyyy\".\n- **payee_name (String):** The name of the payee, i.e., the recipient of the payment.\n- **bank_name (String):** The name of the bank.\n- **bank_code (String):** A code or identifier for the bank.\n- **amount (Decimal):** The amount of the payment.\n- **amount_in_words (String):** The amount in words, for example, \"One thousand dollars.\"\n- **email_address (String):** The email address associated with the payment.\n- **payment_mode (String):** The mode of payment, e.g., \"Cheque.\""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Payment Details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sessionid",
+						"value": "fundsonline",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\": [\r\n        {\r\n            \"payment_id\": 2\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/payments/read",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"payments",
+						"read"
+					]
+				},
+				"description": "Get All the Payment details, if payment_id is provided it fetch the data for that payment is"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Payment Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sessionid",
+						"value": "fundsonline",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\": [\r\n        {\r\n            \"payment_id\": 3,\r\n            \"payee_name\": \"Abhishek\",\r\n            \"email_address\": \"adityarautr947@example.com\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/payments/edit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"payments",
+						"edit"
+					]
+				},
+				"description": "With this request you can edit following details of particular payment\n\n- Payee Name\n    \n- Email Address"
+			},
+			"response": []
+		},
+		{
+			"name": "Authorize Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sessionid",
+						"value": "fundsonline",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\": [\r\n        {\r\n            \"payment_id\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/payments/authorize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"payments",
+						"authorize"
+					]
+				},
+				"description": "To Authorize Processed Payment, A notification will be sent to email associated with the Payment. It takes payment_id from the request data and change authorization status for it."
+			},
+			"response": []
+		},
+		{
+			"name": "Unauthorize Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sessionid",
+						"value": "fundsonline",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\": [\r\n        {\r\n            \"payment_id\": 1\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/payments/unauthorize",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"payments",
+						"unauthorize"
+					]
+				},
+				"description": "To Unauthorize Processed Payment, A notification will be sent to email associated with the Payment. It takes payment_id from the request data and change authorization status for it."
+			},
+			"response": []
+		}
+	]
+}
