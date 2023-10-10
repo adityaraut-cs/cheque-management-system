@@ -18,7 +18,7 @@ export async function getRabbitMQConnection() {
         });
 
         if (!connection) {
-            logger.error("Error Oracle Connection Pool Not Initialized")
+            logger.error("Error: RabbitMQ Connection Not Initialized")
         }
         return connection;
     } catch (error) {
