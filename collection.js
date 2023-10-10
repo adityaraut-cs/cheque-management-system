@@ -36,7 +36,6 @@ export async function uploadPayments(req, res) {
             ]);
         };
 
-        logger.debug(`Processing Payment Data: { payment_id: ${payment_id}, payment_date: ${payment_date}, payee_name: ${payee_name}, bank_name: ${bank_name}, bank_code: ${bank_code}, amount: ${amount}, amount_in_words: ${amount_in_words}, email_address: ${email_address}, payment_mode: ${payment_mode}}`)
 
         const insertStatement = ` INSERT INTO payments_data (payment_id, payment_date, payee_name, bank_name, bank_code, amount, amount_in_words, email_address, payment_mode) VALUES (:payment_id, to_date(:payment_date, 'DD-MM-YYYY'), :payee_name, :bank_name, :bank_code, :amount, :amount_in_words, :email_address, :payment_mode) `;
         const auditInsertStatement = `INSERT INTO payment_audit (audit_id, payment_id, action_type, changed_by) VALUES (payment_audit_seq.nextval, :payment_id, 'upload', :changed_by) `;
